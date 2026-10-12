@@ -6,6 +6,8 @@ description: >
   implementation, integration, and fixes; keep planning and final acceptance
   in the parent. Do not activate for ordinary tasks or merely to discuss,
   inspect, or edit this skill.
+metadata:
+  version: "1.0.0"
 ---
 
 # Orchestrate
