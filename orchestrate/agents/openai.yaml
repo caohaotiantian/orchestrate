@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrate"
+  short_description: "Delegate continuously with bounded verification"
+  default_prompt: "Use $orchestrate to coordinate native subagents through final acceptance."
