@@ -87,3 +87,11 @@ Required reviews and checks take precedence over optional efficiency measures.
 
 The skill loads references only when the next decision requires them.
 The `metadata.version` field in [SKILL.md](orchestrate/SKILL.md) records the skill version.
+
+## Version history
+
+See [CHANGELOG.md](CHANGELOG.md) for dated changes and source commits.
+When the skill version changes, update the changelog in the same change.
+Keep entries in descending version order and describe changes that affect users.
+If a version exists only during development, identify it without inventing a separate release.
+Documentation-only edits do not require a skill version increase.
