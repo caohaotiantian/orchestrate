@@ -20,6 +20,7 @@ In shared workspaces, permit concurrency only when explicit ownership and comman
 side effects establish independence. Disjoint filenames alone do not establish
 isolation: account for generated files, locks, shared metadata, and repository state.
 Serialize conflicts if adequate isolation is unavailable.
+If the implementation workflow requires separate working trees, provide them before concurrent writes.
 
 Keep reviewed artifacts stable. Use supported status and process mechanisms to
 establish that modifying commands stopped. Report unknown process state. Do not

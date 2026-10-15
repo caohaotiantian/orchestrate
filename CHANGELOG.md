@@ -2,6 +2,21 @@
 
 This file records published skill versions, with the newest version first.
 The version in `orchestrate/SKILL.md` identifies the current skill version.
+Unreleased entries describe changes before a tagged release.
+
+## 1.3.0 — Unreleased
+
+### Changed
+
+- Keep task scheduling, dependencies, shared interfaces, and integrated acceptance with the parent.
+- Assign implementation plans, changes, checks, review, and repairs to each implementer.
+- Use three-loop-workflow when available and applicable, including for parent-owned implementation.
+- Separate execution mode from implementation depth and preserve required role allocation.
+- Connect task briefs, local results, and global records through artifact and acceptance references.
+- Apply explicit review fallbacks and preserve repair limits across ownership changes.
+- Distinguish local evidence from required integrated and clean-state checks.
+- Allow a compact coordination record for short parent-only work and require promotion before durable coordination becomes necessary.
+- Specify the starting revision and required uncommitted inputs in each implementation assignment.
 
 ## 1.2.0 — 2026-10-15
 

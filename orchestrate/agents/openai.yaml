@@ -1,4 +1,4 @@
 interface:
   display_name: "Orchestrate"
-  short_description: "Choose direct or delegated work to match task complexity"
-  default_prompt: "Use $orchestrate to choose direct, mixed, or delegated execution from task complexity and coordination cost. Complete the task through final acceptance."
+  short_description: "Schedule tasks, dependencies, and integrated acceptance"
+  default_prompt: "Use $orchestrate to schedule tasks and dependencies. Assign an implementation workflow to each change. Confirm integrated acceptance."

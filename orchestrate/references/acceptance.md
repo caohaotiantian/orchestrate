@@ -2,8 +2,9 @@
 
 ## Verification plan
 
-Choose checks from impact, uncertainty, and governing requirements. Record what
-would establish acceptance before execution, including a stopping condition.
+Define integrated acceptance before execution, including a stopping condition.
+Reference each implementation's required gates rather than inventing a second implementation review process.
+For work without an implementation workflow, select evidence from impact, uncertainty, and governing requirements:
 
 | Risk | Default evidence |
 | --- | --- |
@@ -11,8 +12,10 @@ would establish acceptance before execution, including a stopping condition.
 | Medium: implementation or behavioral fixes | Inspect relevant complete diffs including new files; run focused behavior and interface checks |
 | High: permissions, security, migration, destructive operations, cross-system contracts | Add applicable failure/regression, compatibility and data-integrity checks; independent review when feasible or required; required approvals |
 
-If required independent review is unavailable, keep acceptance blocked. If review
-is optional but unavailable, report the limitation and decide from concrete risk.
+If independent review is unavailable, follow the governing requirement's explicit fallback.
+Without a permitted fallback, keep required review blocked.
+Disclose any permitted self-review. Do not report it as independent review.
+If review is optional, report the limitation and decide from concrete risk.
 Risk does not weaken permissions, ownership, or isolation requirements.
 
 ## Check cadence and stopping rule
@@ -26,6 +29,8 @@ Maintain a compact check ledger: criterion, command or method, relevant artifact
 revision, result, evidence path, and invalidation trigger. Reuse passing evidence
 while relevant inputs and assumptions remain unchanged. A new task status or
 context transition alone does not invalidate a check.
+Keep required merged-result and clean-state checks distinct from local slice checks.
+Reuse evidence only when its artifact and environment satisfy the governing requirement.
 
 Stop checking when all required criteria have sufficient evidence and no concrete
 material uncertainty remains. Do not broaden tests merely because earlier tests
@@ -44,6 +49,8 @@ checks against stable integrated artifacts; establish relevant writers stopped.
 ## Recovery
 
 Return specific findings to the responsible owner.
+Apply the implementation workflow's repair limits and escalation conditions to that assignment.
+Preserve those conditions when an executor changes. Forward required user decisions instead of resetting repair counts.
 For delegated work, use supported reassignment or provide a replacement with the complete brief and artifacts.
 The parent may repair parent-owned work.
 Before the parent assumes delegated repairs, transfer ownership under the execution-mode rules.

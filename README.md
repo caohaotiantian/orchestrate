@@ -1,8 +1,9 @@
 # Orchestrate
 
 Orchestrate is a skill for coordinated work with native subagents: separate agents that execute assigned tasks within the host.
-The parent agent owns the plan, task assignments, interface decisions, and final acceptance.
-The parent can perform substantive work directly or assign it to subagents.
+The parent agent owns the overall plan, task assignments, shared interfaces, and integrated acceptance.
+Each implementer owns the assigned implementation plan, changes, evidence, review, and repairs.
+The parent can implement an assigned slice or assign it to a subagent.
 
 Invoke Orchestrate to select an execution structure with clear ownership and evidence of completion.
 Simple tasks can remain with the parent, even when the skill is explicitly invoked.
@@ -17,6 +18,29 @@ Delegate only when the benefit justifies coordination cost or an explicit role r
 Reassess the mode when scope or dependencies change.
 Complexity alone does not require delegation when the work cannot split usefully.
 
+## Use with three-loop-workflow
+
+Orchestrate schedules work. When available and applicable, three-loop-workflow guides each implementation through Plan, Build, and Close.
+It defines implementation depth, verification, review, and repair stop conditions.
+Without that skill, Orchestrate uses the project's implementation workflow and checks.
+
+Execution mode and implementation depth are separate decisions.
+Direct execution can require Standard or Deep implementation gates, including independent review.
+Assign the same implementation workflow to parent-owned and delegated changes.
+
+Include scope, interfaces, workspace ownership, acceptance criteria, and the local plan path in each assignment.
+Specify the starting revision and verify required uncommitted inputs before dependent implementation.
+Executors return artifact revisions, evidence, review state, and unresolved requests.
+The parent resolves scheduling requests and checks integrated acceptance.
+Successful local checks alone do not establish that the combined result works.
+
+```text
+Use $orchestrate to schedule this change.
+Use $three-loop-workflow for each implementation assignment.
+Keep shared interface decisions with the parent.
+Verify the integrated result before completion.
+```
+
 ## Why use it?
 
 - **Clear ownership.** Each task has a responsible agent, defined outputs, and acceptance evidence.
@@ -28,9 +52,13 @@ Complexity alone does not require delegation when the work cannot split usefully
 The skill limits redundant checks while preserving required reviews, host permissions, and existing authorization boundaries.
 It does not promise faster execution for every task.
 
-## Durable work records
+## Work records
 
-In every mode, the parent maintains three files in the project task directory.
+Short parent-only work can use one compact record in the conversation or an existing task record.
+Before delegation, deferred work, another session, a context transition, handoff, or ongoing background work, create durable records.
+Preserve implementation plans and stronger project requirements.
+
+For durable work, the parent maintains three files in the project task directory.
 The default location is `.orchestration/<task-id>/`.
 
 | File | Purpose |
@@ -40,9 +68,10 @@ The default location is `.orchestration/<task-id>/`.
 | HANDOFF.md | Resume context, artifact locations, process state, and immediate next steps |
 
 Update affected records after dispatch, material results, scope changes, blockers, and acceptance decisions.
-Before work switches or handoffs, synchronize all three records.
+For durable work, synchronize all three records before work switches or handoffs.
 Executors use separate evidence files to prevent concurrent writes to the parent records.
 Keep records brief and link evidence instead of copying transcripts.
+Keep each implementation plan with its task. Reference it from the parent records.
 
 ## Example requests
 

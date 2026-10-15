@@ -8,22 +8,29 @@ Do not interfere with runtime-managed automatic compaction.
 
 ## Record location and ownership
 
-Use STATE.md, TODO.md, and HANDOFF.md in one canonical task directory.
+Use the record form selected in SKILL.md.
+For durable records, keep STATE.md, TODO.md, and HANDOFF.md in one canonical task directory.
 Follow the project location, or default to `.orchestration/<task-id>/`.
 Use separate directories for separate tasks and retain stable task IDs.
 If records already exist, reconcile them instead of creating a competing set.
-In every mode, initialize the three records before substantive execution.
-For short direct work, keep each record brief.
+When promotion is required, transfer essential facts and evidence references from the compact record into the durable records.
 If durable storage is unavailable, report the continuity limitation and the state that cannot be preserved.
 
-The parent owns the three records and reconciles executor reports with actual artifacts and evidence.
+The parent owns the canonical records and reconciles executor reports with actual artifacts and evidence.
 Give executors separate evidence paths and identify the canonical records in each brief.
 Do not permit concurrent writes to the canonical records.
 If the parent role transfers, establish one successor before record writes resume.
 
 ## Record responsibilities
 
+A compact record preserves the objective, scope, result or next action, and evidence references.
+For durable records, use the responsibilities below.
+
 Store each fact in its responsible record and reference it from the others.
+Keep global scope, assignments, dependencies, and integrated acceptance in parent-owned records.
+Keep implementation plans, selected depth, review findings, and detailed evidence in the assigned task's artifacts.
+For parent-owned implementation, preserve the same distinction between global records and the local plan.
+Give each task a plan path under its task directory or the project's established convention.
 Keep current facts concise and replace stale summaries.
 Preserve decisions that still constrain the work, with their reasons.
 Keep verbose logs and transcripts outside these records.
@@ -34,7 +41,7 @@ Keep verbose logs and transcripts outside these records.
 | STATE.md | Current artifacts and revisions, relevant decisions, accepted results, evidence references, blockers, and next action |
 | STATE.md | Active or unknown modifying commands, resource conflicts, and facts that remain uncertain |
 | TODO.md | Stable task IDs, deliverables, status, owners, dependencies, and affected files or workspaces |
-| TODO.md | Acceptance criteria, evidence references, blockers, and the next ready tasks |
+| TODO.md | References to local plans and acceptance criteria, evidence, blockers, and the next ready tasks |
 | HANDOFF.md | Resume entry point, relevant record and artifact paths, environment requirements, and immediate next steps |
 | HANDOFF.md | Last completed action, unfinished work, process and resource state, and ownership transfer details when applicable |
 
@@ -58,7 +65,7 @@ Update only the affected sections after each meaningful event:
 
 Record dispatch and ownership before dependent or conflicting work starts.
 Record material results before another decision depends on them.
-Before a work switch, handoff, or anticipated context transition, synchronize all three records.
+For durable work, synchronize all three records before a work switch, handoff, or anticipated context transition.
 At closure, record final acceptance, unresolved items, and process state.
 Do not delay updates until the final response.
 Do not record every tool call or minor edit.
@@ -78,7 +85,8 @@ Reference existing decisions and evidence rather than reconstructing them from m
 
 ## Resume
 
-1. Read HANDOFF.md for the resume entry point.
+1. Locate the canonical record. If promotion is required, create durable records before further execution.
+   Read HANDOFF.md for the resume entry point.
 2. Read STATE.md, TODO.md, and applicable governing instructions.
 3. Check the objective and scope against the latest user instructions.
 4. Reconcile artifact revisions, task ownership, process state, and evidence needed for the next decision.

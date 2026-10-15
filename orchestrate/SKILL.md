@@ -2,21 +2,25 @@
 name: orchestrate
 description: >
   Coordinate native subagents when the user explicitly invokes $orchestrate
-  or requests multi-agent orchestration. Choose direct, mixed, or delegated
-  execution from task complexity and coordination cost. Keep planning and
-  final acceptance in the parent. Do not activate for ordinary tasks or merely to discuss,
-  inspect, or edit this skill.
+  or requests multi-agent orchestration. Own task allocation, dependencies,
+  and integrated acceptance. Do not activate merely to inspect or edit this skill.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Orchestrate
 
 ## Operating contract
 
-Keep the parent responsible for the plan, execution choices, interface decisions,
-acceptance, and user communication. Allow the parent to investigate, implement,
-integrate, and repair within the selected execution mode.
+Keep the parent responsible for the overall plan, scheduling, shared interfaces,
+integration ownership, integrated acceptance, and user communication.
+Each implementer owns the assigned implementation plan, changes, evidence, review, and repairs.
+The parent may implement an assigned slice under the same implementation workflow as other executors.
+
+When available and applicable, use `three-loop-workflow` for implementation and pre-landing review.
+Let it define implementation depth, checks, review requirements, and repair stop conditions.
+Keep execution mode separate from implementation depth. Direct execution does not waive implementation gates.
+Without that skill, use the project's implementation workflow and checks.
 
 Follow host instructions, permissions, and existing user authorization.
 Use only exposed native capabilities. Do not invent tools, agents, results,
@@ -56,14 +60,14 @@ is explicitly assigned. Do not assume executors inherit this skill.
 
 1. Read applicable project instructions and select an execution mode.
    Discover delegation capabilities only when delegation or a required role needs them.
-2. Define deliverables, dependencies, ownership, and acceptance evidence.
-   Initialize or reconcile STATE.md, TODO.md, and HANDOFF.md before substantive execution.
-3. Execute parent-owned work directly. Dispatch assigned slices using self-contained briefs.
+2. Define deliverables, dependencies, ownership, shared interfaces, and integrated acceptance evidence.
+   Select and initialize the work records before substantive execution.
+3. Execute parent-owned slices through the implementation workflow. Dispatch other slices with self-contained briefs.
    Keep tightly coupled work together; split only when the benefit exceeds coordination cost.
 4. Continue execution through meaningful implementation units. Treat milestones
    as internal progress markers, not user acceptance gates.
-5. Integrate when needed. Run focused checks on stable outputs.
-   Assign repairs to the relevant owner. Continue ready work after successful checks.
+5. Schedule integration and required checks against stable outputs.
+   Assign repairs to the implementation owner. Continue unaffected ready work.
 6. Perform final acceptance against the integrated result and close the task.
 
 Prioritize useful execution over intermediate reviews.
@@ -71,7 +75,8 @@ Batch related changes; do not inspect or test after every minor edit.
 Do not repeatedly summarize finished work or ask for confirmation. Request
 input only for a consequential irreversible decision requiring approval,
 missing requirements that prevent correct execution, or an applicable safety
-constraint. Honor all host-required approvals and progress updates.
+constraint. Forward implementation decision requests and stop conditions to the user when required.
+Honor all host-required approvals and progress updates.
 
 Avoid redundant inspections, tests, and status reports. Stop verification when
 recorded criteria pass and no material uncertainty remains. Repeat checks only
@@ -83,9 +88,14 @@ or context usage appears high. Preserve essential state in repository records
 before anticipated context transitions. Runtime-managed automatic compaction
 and required safety checks remain authoritative.
 
-## Durable work records
+## Work records
 
-In every execution mode, keep STATE.md, TODO.md, and HANDOFF.md in one task directory.
+For short parent-only work without delegation, deferred work, handoff, or ongoing background work, use one compact record.
+Keep it in the conversation or an existing task record.
+Preserve implementation plans and stronger project record requirements.
+
+Before delegation, deferred work, another session, a context transition, handoff, or ongoing background work, create durable records.
+Expand the compact record into STATE.md, TODO.md, and HANDOFF.md in one task directory.
 Use the project location or default to `.orchestration/<task-id>/`.
 Keep the parent responsible for timely updates and consistency across these records.
 
@@ -93,10 +103,11 @@ Keep the parent responsible for timely updates and consistency across these reco
 - TODO.md: Track task IDs, status, owners, dependencies, acceptance criteria, and evidence references.
 - HANDOFF.md: Preserve the minimum context, artifact locations, process state, and next steps needed to resume or transfer work.
 
-Initialize these records before substantive execution, including direct execution.
-Keep short tasks brief rather than omitting the records.
+Keep implementation plans and detailed evidence with their task owners.
+Reference those artifacts from the parent records. Do not duplicate their contents or let executors modify global records.
+
 Update affected records after dispatch, material results, scope changes, blockers, ownership changes, and acceptance decisions.
-Before a work switch, handoff, or anticipated context transition, synchronize all three records.
+Before a work switch, handoff, or anticipated context transition, synchronize the durable records.
 Do not wait until the final response to record progress.
 Use references instead of duplicate narratives, logs, or transcripts.
 Read [Context continuity](references/context-continuity.md) before the first record update or recovery.
@@ -105,9 +116,9 @@ Read [Context continuity](references/context-continuity.md) before the first rec
 
 Discover shared resources before parallel writes. Isolate writers or serialize
 conflicts, including generated files, lockfiles, and repository metadata.
-Assign integration ownership before parallel implementation. Integration may
-reuse a qualified executor; independent review is a separate risk-based role.
-Allow the parent to own integration unless a governing workflow requires another owner.
+Assign integration ownership and reserve required review capacity before parallel implementation.
+The parent or a qualified executor may own integration, subject to governing role requirements.
+Route workspace, dependency, interface, and role requests through the parent before affected work resumes.
 
 Establish that relevant modifying commands have stopped before reviewing or
 checking an artifact. An interrupted agent does not prove its processes stopped.
@@ -130,7 +141,6 @@ Each reference is independent and uses host-neutral terminology.
 | Planning checks, reviewing results, or handling failures | [Acceptance](references/acceptance.md) |
 | Maintaining execution continuity or recovering after compaction | [Context continuity](references/context-continuity.md) |
 
-If a governing workflow such as `three-loop-workflow` is available and applicable,
-read it and map its checks into one shared acceptance plan. Do not duplicate
-reviews or tests already satisfied on the same artifact. Required checks and
-role separation take precedence over optional efficiency heuristics.
+Map implementation gates and integrated checks into one acceptance plan through references to their owning records.
+Do not duplicate reviews or tests already satisfied on the same artifact under the required conditions.
+Required checks and role separation take precedence over optional efficiency heuristics.
