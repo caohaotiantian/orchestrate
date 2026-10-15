@@ -43,9 +43,10 @@ checks against stable integrated artifacts; establish relevant writers stopped.
 
 ## Recovery
 
-Return specific findings to the responsible executor using supported reassignment.
-Reuse useful context or provide a replacement with the complete brief and artifacts.
-Delegate fixes; do not implement them in the parent.
+Return specific findings to the responsible owner.
+For delegated work, use supported reassignment or provide a replacement with the complete brief and artifacts.
+The parent may repair parent-owned work.
+Before the parent assumes delegated repairs, transfer ownership under the execution-mode rules.
 
 Retry with actionable evidence or a revised hypothesis. After repeated similar
 failures, reassess assumptions, dependencies, ownership, and task boundaries.

@@ -2,10 +2,20 @@
 
 Orchestrate is a skill for coordinated work with native subagents: separate agents that execute assigned tasks within the host.
 The parent agent owns the plan, task assignments, interface decisions, and final acceptance.
-Subagents perform substantive investigation, implementation, integration, and repairs.
+The parent can perform substantive work directly or assign it to subagents.
 
-Use Orchestrate when a task needs delegated execution with clear ownership and evidence of completion.
-It supports parallel work where the task permits it and one executor where the work cannot split.
+Invoke Orchestrate to select an execution structure with clear ownership and evidence of completion.
+Simple tasks can remain with the parent, even when the skill is explicitly invoked.
+Delegate only when the benefit justifies coordination cost or an explicit role requirement applies.
+
+| Mode | Typical task | Ownership |
+| --- | --- | --- |
+| Direct | Small correction or focused investigation | The parent completes the work |
+| Mixed | Main task with a useful independent investigation | The parent and executors own separate slices |
+| Delegated | Substantial independent work or required context isolation | Executors complete assigned work |
+
+Reassess the mode when scope or dependencies change.
+Complexity alone does not require delegation when the work cannot split usefully.
 
 ## Why use it?
 
@@ -17,6 +27,22 @@ It supports parallel work where the task permits it and one executor where the w
 
 The skill limits redundant checks while preserving required reviews, host permissions, and existing authorization boundaries.
 It does not promise faster execution for every task.
+
+## Durable work records
+
+In every mode, the parent maintains three files in the project task directory.
+The default location is `.orchestration/<task-id>/`.
+
+| File | Purpose |
+| --- | --- |
+| STATE.md | Current objective, scope, decisions, evidence, blockers, and next action |
+| TODO.md | Task progress, owners, dependencies, and acceptance status |
+| HANDOFF.md | Resume context, artifact locations, process state, and immediate next steps |
+
+Update affected records after dispatch, material results, scope changes, blockers, and acceptance decisions.
+Before work switches or handoffs, synchronize all three records.
+Executors use separate evidence files to prevent concurrent writes to the parent records.
+Keep records brief and link evidence instead of copying transcripts.
 
 ## Example requests
 
@@ -39,9 +65,10 @@ Ordinary tasks and requests to inspect or edit this skill do not activate its or
 
 ## Requirements and boundaries
 
-The host must expose native subagent capabilities and permit delegation.
-If delegation is unavailable, the skill requires a blocker report and actionable task briefs.
-The parent must not silently replace delegated execution with its own implementation.
+Delegated execution requires native subagent capabilities and permission to delegate.
+If delegation is unavailable, the parent can execute directly when host and user instructions permit it.
+If a required role is unavailable, report the blocker and actionable task briefs.
+Preserve explicit user role assignments and required independent review in every mode.
 
 The skill uses only exposed host capabilities.
 It does not provide an agent runtime or bypass host permissions.

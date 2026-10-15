@@ -1,5 +1,8 @@
 # Dispatch and result contracts
 
+Use this reference when the selected mode includes delegated slices.
+Do not create slices or agent briefs for direct execution.
+
 Define acceptance before dispatch. Use the smallest useful dependency plan;
 avoid creating slices solely to increase utilization. Resolve critical shared
 interfaces before dependent implementation. Dispatch ready independent work;
@@ -20,7 +23,8 @@ to read applicable project instructions and relevant skills.
 - Applicable instructions and skills:
 - Acceptance criteria and focused checks:
 - Integration owner, if needed:
-- Evidence record path and expected report format:
+- Canonical STATE.md, TODO.md, and HANDOFF.md paths (parent-owned):
+- Separate executor evidence path and expected report format:
 - Execution policy: batch related changes; continue through internal milestones;
   verify meaningful units, not individual edits; avoid repeated checks without
   a changed artifact, failure, or unresolved concern.
@@ -39,8 +43,8 @@ to read applicable project instructions and relevant skills.
 Validate structured results; do not assume host schema enforcement.
 Store verbose logs and intermediate evidence in task-local files when available.
 Use one integration owner to combine accepted contributions; provide all changes,
-contracts, and checks. Reuse a qualified executor unless a governing workflow
-requires independent integration. Assign independent review separately.
+contracts, and checks. The parent or a qualified executor may own integration unless a governing workflow
+requires an independent owner. Assign independent review separately.
 
 Revise affected slices when evidence changes dependencies or assumptions.
 Continue unaffected ready work. Cancel obsolete work through supported mechanisms.

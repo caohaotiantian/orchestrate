@@ -1,4 +1,4 @@
 interface:
   display_name: "Orchestrate"
-  short_description: "Delegate continuously with bounded verification"
-  default_prompt: "Use $orchestrate to coordinate native subagents through final acceptance."
+  short_description: "Choose direct or delegated work to match task complexity"
+  default_prompt: "Use $orchestrate to choose direct, mixed, or delegated execution from task complexity and coordination cost. Complete the task through final acceptance."
