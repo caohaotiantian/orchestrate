@@ -4,6 +4,14 @@ This file records published skill versions, with the newest version first.
 The version in `orchestrate/SKILL.md` identifies the current skill version.
 Unreleased entries describe changes before a tagged release.
 
+## 1.4.0 — 2026-10-19
+
+Release: [v1.4.0](https://github.com/caohaotiantian/orchestrate/releases/tag/v1.4.0)
+
+- Share new task records under `.agent/<task-id>/` and preserve existing canonical directories.
+- Define canonical fields, check and review evidence paths, retention, transfer, and a recovery example.
+- Read project memory at entry and maintain sourced lessons after each completed task.
+
 ## 1.3.0 — 2026-10-16
 
 Release: [v1.3.0](https://github.com/caohaotiantian/orchestrate/releases/tag/v1.3.0)

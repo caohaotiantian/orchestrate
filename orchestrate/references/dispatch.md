@@ -26,7 +26,7 @@ The brief's acceptance criteria remain constraints. Implementation detail may re
 - Workspace and owned files/resources:
 - Required starting revision and uncommitted inputs, with verification before dependent implementation:
 - Permitted operations and prohibited changes:
-- Applicable instructions and skills:
+- Applicable instructions, skills, and canonical project MEMORY.md path or accessible copy:
 - Implementation plan path and shared acceptance references:
 - Acceptance criteria and focused checks:
 - Required roles and capacity, with permitted review fallback:

@@ -59,19 +59,23 @@ Before delegation, deferred work, another session, a context transition, handoff
 Preserve implementation plans and stronger project requirements.
 
 For durable work, the parent maintains three files in the project task directory.
-The default location is `.orchestration/<task-id>/`.
+The default location is `.agent/<task-id>/`.
 
 | File | Purpose |
 | --- | --- |
-| STATE.md | Current objective, scope, decisions, evidence, blockers, and next action |
+| STATE.md | Global scope, shared decisions, integrated acceptance, and execution conditions |
 | TODO.md | Task progress, owners, dependencies, and acceptance status |
-| HANDOFF.md | Resume context, artifact locations, process state, and immediate next steps |
+| HANDOFF.md | Resume instructions and links to canonical state and tasks |
 
 Update affected records after dispatch, material results, scope changes, blockers, and acceptance decisions.
 For durable work, synchronize all three records before work switches or handoffs.
 Executors use separate evidence files to prevent concurrent writes to the parent records.
 Keep records brief and link evidence instead of copying transcripts.
 Keep each implementation plan with its task. Reference it from the parent records.
+
+Project-root `MEMORY.md` preserves reusable lessons and supported user preferences across sessions.
+The parent reads it at entry and maintains it after each completed task.
+See [context continuity](orchestrate/references/context-continuity.md) for field ownership, evidence paths, retention, and a worked example.
 
 ## Example requests
 

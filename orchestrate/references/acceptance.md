@@ -25,6 +25,7 @@ integration point whose failure could alter the next implementation decision.
 Run focused verification there; reserve broad final checks for the integrated
 artifact. Do not interrupt execution for ceremonial milestone reviews.
 
+Use the context continuity evidence paths for durable work.
 Maintain a compact check ledger: criterion, command or method, relevant artifact
 revision, result, evidence path, and invalidation trigger. Reuse passing evidence
 while relevant inputs and assumptions remain unchanged. A new task status or
@@ -67,3 +68,5 @@ than inventing enforced lifecycle semantics. Confirm required outputs, integrati
 verification, agent status, and stopped modifying commands. Report deliverables,
 key evidence, delegated IDs when exposed, and remaining gaps concisely. Do not
 repeat the entire work history or claim acceptance based on completion messages.
+
+Before final closure, complete the project memory review defined in context continuity.
