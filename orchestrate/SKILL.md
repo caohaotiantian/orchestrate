@@ -5,7 +5,7 @@ description: >
   or requests multi-agent orchestration. Own task allocation, dependencies,
   and integrated acceptance. Do not activate merely to inspect or edit this skill.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Orchestrate

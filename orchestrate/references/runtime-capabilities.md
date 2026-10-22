@@ -22,6 +22,16 @@ isolation: account for generated files, locks, shared metadata, and repository s
 Serialize conflicts if adequate isolation is unavailable.
 If the implementation workflow requires separate working trees, provide them before concurrent writes.
 
+Default to `<outermost-checkout-parent>/.worktree/<outermost-repository>/<module-path>/<task>` for new worktrees.
+For standalone repositories, omit the module path. Preserve nested module paths beneath the outermost repository namespace.
+For linked trees, resolve the original checkout first. Use verified checkout paths, not Git metadata directories.
+Keep new worktrees outside existing checkouts.
+Check project rules, path ownership, and branch occupancy before creation.
+If the anchor is ambiguous or the default unavailable, stop before creation.
+Before a deviation, explain its reason, proposed absolute path, scope, and effects.
+Obtain explicit user confirmation unless an applicable confirmed exception exists.
+Record durable rules in AGENTS.md and confirmed exceptions in MEMORY.md, with scope, reason, and source.
+
 Keep reviewed artifacts stable. Use supported status and process mechanisms to
 establish that modifying commands stopped. Report unknown process state. Do not
 bypass host restrictions through alternate processes or fabricated agents.

@@ -4,6 +4,15 @@ This file records published skill versions, with the newest version first.
 The version in `orchestrate/SKILL.md` identifies the current skill version.
 Unreleased entries describe changes before a tagged release.
 
+## 1.5.0 — 2026-10-22
+
+Release: [v1.5.0](https://github.com/caohaotiantian/orchestrate/releases/tag/v1.5.0)
+
+- Default new worktrees to a shared sibling `.worktree` directory with repository and module namespaces.
+- Use verified checkout anchors for modules and linked worktrees.
+- Require explicit confirmation before location deviations, with applicable confirmed exceptions reused.
+- Record durable location rules in AGENTS.md and confirmed exception decisions in MEMORY.md.
+
 ## 1.4.0 — 2026-10-19
 
 Release: [v1.4.0](https://github.com/caohaotiantian/orchestrate/releases/tag/v1.4.0)
