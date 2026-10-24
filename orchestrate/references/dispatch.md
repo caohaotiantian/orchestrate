@@ -26,12 +26,12 @@ The brief's acceptance criteria remain constraints. Implementation detail may re
 - Workspace and owned files/resources:
 - Required starting revision and uncommitted inputs, with verification before dependent implementation:
 - Permitted operations and prohibited changes:
-- Applicable instructions, skills, and canonical project MEMORY.md path or accessible copy:
+- Applicable instructions, skills, and relevant memory sections or accessible references, with their reuse conditions:
 - Implementation plan path and shared acceptance references:
 - Acceptance criteria and focused checks:
 - Required roles and capacity, with permitted review fallback:
 - Integration owner, if needed:
-- Canonical STATE.md, TODO.md, and HANDOFF.md paths (parent-owned):
+- Current task HANDOFF.md path and any assigned STATE.md or TODO.md sections (parent-owned):
 - Separate executor evidence path and expected report format:
 - Execution policy: batch related changes; continue through internal milestones;
   verify meaningful units, not individual edits; avoid repeated checks without

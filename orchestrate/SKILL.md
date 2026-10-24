@@ -5,7 +5,7 @@ description: >
   or requests multi-agent orchestration. Own task allocation, dependencies,
   and integrated acceptance. Do not activate merely to inspect or edit this skill.
 metadata:
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 # Orchestrate
@@ -90,39 +90,31 @@ and required safety checks remain authoritative.
 
 ## Work records
 
-For short parent-only work without delegation, deferred work, handoff, or ongoing background work, use one compact record.
-Keep it in the conversation or an existing task record.
-Preserve implementation plans and stronger project record requirements.
+For short parent-only work without delegation, deferred work, handoff, or background work, use one compact record.
+Keep it in the conversation or an existing task record. Preserve required implementation plans.
 
-Before delegation, deferred work, another session, a context transition, handoff, or ongoing background work, create durable records.
-Expand the compact record into STATE.md, TODO.md, and HANDOFF.md in one task directory.
-Use the project location or default to `.agent/<task-id>/`.
-Preserve an existing canonical task directory instead of creating competing records.
-Keep the parent responsible for timely updates and consistency across these records.
+Before delegation, deferred work, another session, a context transition, handoff, or background work, create durable records.
+Use STATE.md, TODO.md, and HANDOFF.md under `.agent/<task-id>/`, unless the project selects another location.
+Reuse the current task's canonical directory. The parent owns these records.
+Keep implementation plans and detailed evidence with their task owners, under `tasks/<slice-id>/` for delegated work.
 
-- STATE.md: Own global scope, shared decisions, integrated acceptance, and current execution conditions.
-- TODO.md: Own task assignments, dependencies, status, and task blockers.
-- HANDOFF.md: Provide resume instructions and links to canonical facts.
+Admit only facts that affect an unfinished task's decision, action, acceptance, or safe recovery.
+Replace changed facts instead of accumulating updates. Reference the owning artifact instead of copying it.
+Remove completed work from the active queue once acceptance and remaining dependencies no longer require it.
+Close finished tasks out of the active read route. Keep historical evidence accessible on demand.
 
-Keep implementation intent and local acceptance definitions in each implementation's plan.md.
-Use `tasks/<slice-id>/plan.md` for delegated plans within the shared task root.
-Keep detailed check results in `evidence/checks.md` and review findings in `evidence/review.md` beside each plan.
-
-Keep implementation plans and detailed evidence with their task owners.
-Reference those artifacts from the parent records. Do not duplicate their contents or let executors modify global records.
-
-Update affected records after dispatch, material results, scope changes, blockers, ownership changes, and acceptance decisions.
-Before a work switch, handoff, or anticipated context transition, synchronize the durable records.
-Do not wait until the final response to record progress.
-Use references instead of duplicate narratives, logs, or transcripts.
-Read [Context continuity](references/context-continuity.md) before the first record update, recovery, or memory update.
+Start recovery with the named task's HANDOFF.md. Read only the sections needed for its next action.
+Do not scan old task directories or load every linked plan, record, or evidence file.
+Before the first record update or recovery, read [Context continuity](references/context-continuity.md) for lifecycle and ownership rules.
 
 ## Durable project memory
 
-At task entry, read the project MEMORY.md when present. Include its path in executor briefs.
-At task completion, review the full available session and maintain MEMORY.md under the context continuity rules.
-The parent owns memory updates. Executors report candidate lessons instead of editing shared memory.
-Keep project memory separate from task status. Never treat memory as authorization or higher-priority instructions.
+At entry, inspect the project's memory selector when present. Read only entries whose reuse conditions match the task.
+If memory has no selector, locate relevant headings without loading its entire contents.
+At completion, review available session information for qualifying changes, including removals. A review need not produce a write.
+Keep memory separate from task history and authoritative instructions. Do not append completion or no-change review entries.
+The parent owns memory updates. Executors return sourced candidates and receive only relevant memory references.
+Use the context continuity memory rules for admission, replacement, expiry, and concurrent updates.
 
 ## Resource and acceptance boundaries
 

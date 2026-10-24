@@ -54,28 +54,17 @@ It does not promise faster execution for every task.
 
 ## Work records
 
-Short parent-only work can use one compact record in the conversation or an existing task record.
-Before delegation, deferred work, another session, a context transition, handoff, or ongoing background work, create durable records.
-Preserve implementation plans and stronger project requirements.
+Short parent-only work can use a compact record. Durable work uses `.agent/<task-id>/` unless the project selects another location.
+The parent owns STATE.md for current conditions, TODO.md for unfinished work, and HANDOFF.md for the next recovery action.
+Implementation plans and detailed evidence stay with their task owners.
 
-For durable work, the parent maintains three files in the project task directory.
-The default location is `.agent/<task-id>/`.
+The [context continuity rules](orchestrate/references/context-continuity.md) define admission, replacement, exit, ownership, and selective reads.
+New work does not load old task records. Recovery starts with the named handoff and follows only necessary references.
+Closed tasks retain evidence receipts outside the active read route. Evidence retention does not require default context loading.
 
-| File | Purpose |
-| --- | --- |
-| STATE.md | Global scope, shared decisions, integrated acceptance, and execution conditions |
-| TODO.md | Task progress, owners, dependencies, and acceptance status |
-| HANDOFF.md | Resume instructions and links to canonical state and tasks |
-
-Update affected records after dispatch, material results, scope changes, blockers, and acceptance decisions.
-For durable work, synchronize all three records before work switches or handoffs.
-Executors use separate evidence files to prevent concurrent writes to the parent records.
-Keep records brief and link evidence instead of copying transcripts.
-Keep each implementation plan with its task. Reference it from the parent records.
-
-Project-root `MEMORY.md` preserves reusable lessons and supported user preferences across sessions.
-The parent reads it at entry and maintains it after each completed task.
-See [context continuity](orchestrate/references/context-continuity.md) for field ownership, evidence paths, retention, and a worked example.
+At entry, inspect the project memory selector and read only applicable details.
+Memory contains sourced, reusable information absent from authoritative instructions and documentation.
+A completion review may remove entries or produce no write. It does not append task history or review dates.
 
 ## Example requests
 

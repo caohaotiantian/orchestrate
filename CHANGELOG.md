@@ -4,6 +4,16 @@ This file records published skill versions, with the newest version first.
 The version in `orchestrate/SKILL.md` identifies the current skill version.
 Unreleased entries describe changes before a tagged release.
 
+## 1.6.0 — 2026-10-24
+
+Release: [v1.6.0](https://github.com/caohaotiantian/orchestrate/releases/tag/v1.6.0)
+
+- Admit records only for unfinished decisions, acceptance, actions, or safe recovery.
+- Replace changed facts and retire completed work from active queues and read routes.
+- Select memory and recovery details on demand instead of loading complete record sets.
+- Remove duplicate or superseded memory and allow reviews without writes.
+- Preserve required evidence and unresolved obligations without automatic historical loading.
+
 ## 1.5.0 — 2026-10-22
 
 Release: [v1.5.0](https://github.com/caohaotiantian/orchestrate/releases/tag/v1.5.0)

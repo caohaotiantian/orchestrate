@@ -1,173 +1,135 @@
 # Execution and context continuity
 
-Use durable records to reduce memory load and preserve the objective across work switches and parallel execution.
-Continue useful execution through internal milestones without extra user confirmation or review cycles.
-Honor host progress-update requirements with concise material updates.
-Do not proactively request compaction because of a milestone or apparent context pressure.
-Do not interfere with runtime-managed automatic compaction.
+Use records to preserve the next useful action across work switches and context transitions.
+Disk retention does not require context loading. A reference is available evidence, not an instruction to read it.
+Do not request compaction or extra user review at internal milestones. Follow host-managed context transitions.
 
-## Record location and ownership
+## Location and ownership
 
-Use the record form selected in SKILL.md.
-For durable records, keep STATE.md, TODO.md, and HANDOFF.md in one canonical task directory.
-Follow the project location, or default to `.agent/<task-id>/`.
-Use separate directories for separate tasks and retain stable task IDs.
-If records already exist, reconcile them instead of creating a competing set.
-When promotion is required, transfer essential facts and evidence references from the compact record into the durable records.
-If durable storage is unavailable, report the continuity limitation and the state that cannot be preserved.
+Use the record form selected in SKILL.md and the project's canonical task location.
+Default durable records to `.agent/<task-id>/`. Reconcile the current task's existing records instead of creating competing sets.
+The parent owns shared records and verifies executor reports against artifacts and evidence.
+Keep executor evidence separate. Establish one successor before shared-record ownership changes.
+If durable storage is unavailable, report the facts that cannot survive a context transition.
 
-The parent owns the canonical records and reconciles executor reports with actual artifacts and evidence.
-Give executors separate evidence paths and identify the canonical records in each brief.
-Do not permit concurrent writes to the canonical records.
-If the parent role transfers, establish one successor before record writes resume.
+## Admission and field ownership
 
-## Record responsibilities
+Before adding a fact, name the unfinished decision, action, acceptance check, or recovery condition it changes.
+If none exists, omit the fact from working records.
+Keep one authoritative location for each fact. Reference it from other records only when needed.
 
-A compact record preserves the objective, scope, result or next action, and evidence references.
-For durable records, use the responsibilities below.
+| Record | Admitted content | Exit condition |
+| --- | --- | --- |
+| STATE.md | Current scope, constraining decisions, acceptance state, blockers, ownership, revisions, and active or unknown commands | Replace changed state and remove constraints that no longer apply |
+| TODO.md | Unfinished task IDs, owners, dependencies, next actions, blockers, and acceptance links | Remove accepted work when remaining dependencies no longer need its row |
+| HANDOFF.md | Task status, next action, and the sections or artifacts needed for that action | Replace the recovery route when the next action changes |
+| plan.md | Implementation goal, non-goals, acceptance, decisions, selected depth, and rollback | Retain for a named implementation or review decision, then as historical evidence |
+| evidence/checks.md | Criteria, commands, revisions, environment, results, evidence paths, and invalidation conditions | Retain under project evidence policy, outside default recovery reads |
+| evidence/review.md | Review scope, revision, reader, findings, triage, repairs, round count, and unresolved items | Retain under project evidence policy, outside default recovery reads |
 
-Store each fact in its responsible record and reference it from the others.
-Keep global scope, assignments, dependencies, and integrated acceptance in parent-owned records.
-Keep implementation plans, selected depth, review findings, and detailed evidence in the assigned task's artifacts.
-For parent-owned implementation, preserve the same distinction between global records and the local plan.
-Give each task a plan path under its task directory or the project's established convention.
-Keep current facts concise and replace stale summaries.
-Preserve decisions that still constrain the work, with their reasons.
-Keep verbose logs and transcripts outside these records.
+For delegated work, keep plans and evidence beside each slice's plan.
+Keep integrated evidence under the parent task root. Reference shared scope and acceptance instead of duplicating them.
+Keep transcripts, chronological updates, completed task catalogs, and verbose logs outside working records.
+Accepted dependency results may retain a short artifact and evidence reference while unfinished work still needs them.
+Agent completion does not establish task acceptance. Track relevant agent IDs separately from acceptance.
 
-| Record | Required information |
-| --- | --- |
-| STATE.md | Global objective, authorized scope, shared decisions, integrated acceptance, governing instruction paths, and execution mode |
-| STATE.md | Accepted artifact revisions, evidence links, shared blockers, active or unknown modifying commands, resource conflicts, and uncertainties |
-| TODO.md | Stable task IDs, deliverables, owners, dependencies, status, affected files or workspaces, and task blockers |
-| TODO.md | Links to local plans, acceptance definitions, evidence, and the next ready tasks |
-| HANDOFF.md | Resume entry point, canonical record paths, environment requirements, and the next task ID |
-| HANDOFF.md | Ownership transfer details and links to process state and unfinished work |
-| plan.md | Implementation Goal, Non-goals, local Accept, selected depth, implementation decisions, and required rollback |
-| evidence/checks.md | Criterion, command or observation, artifact revision, environment, result, evidence path, and invalidation trigger |
-| evidence/review.md | Review scope and revision, reviewer, findings, triage, repairs, round count, and unresolved items |
+## Replacement and exit
 
-For integrated checks, use evidence files under the parent task root.
-For slice checks and reviews, use evidence files beside that slice's plan.
-A parent plan can define global scope and acceptance. In that case, STATE.md references those sections instead of copying them.
-HANDOFF.md is a resume guide. The implementation's final change description reports delivery evidence and limitations.
-Neither document replaces the other.
+Update affected sections after scope, ownership, a material result, a blocker, acceptance, or process state changes.
+Record dispatch before dependent work starts. Record results before another decision depends on them.
+Replace the previous value in place. Do not append an event narrative or a second summary.
+Preserve decision reasons only while they constrain unfinished work. Preserve detailed reasons in the owning plan or evidence.
+If no relevant fact changes, leave the records unchanged, including review dates.
+Before a work switch or context transition, reconcile the current records and recovery route.
 
-Include the last update time and relevant artifact revision in each record.
-In TODO.md, distinguish pending, active, blocked, and done tasks.
-Track agent lifecycle separately from task acceptance, including exposed agent IDs when available.
-A completed agent does not make its task done until the acceptance criteria pass.
-Link acceptance criteria to their canonical definition instead of copying them into every record.
-Keep HANDOFF.md usable by a fresh context without the conversation transcript.
-When no transfer is pending, maintain a concise resume snapshot rather than inventing a recipient.
+Remove accepted TODO rows after the dependency condition in the table is satisfied.
+Keep the final result and evidence reference in the closure receipt, not as a growing done list.
+Cancellation ends a task only after its obligations and command state are resolved or explicitly transferred.
 
-## Update events
+Close a task only after acceptance, required review, dependent work, and handoffs are complete.
+Confirm that modifying commands have stopped. Unknown process state prevents closure and conflicting writes.
+Resolve remaining obligations or transfer them to an identified owner and accessible task before closure.
+Do not mark unfinished or merely inactive work closed.
 
-Update only the affected sections after each meaningful event:
+At closure, replace STATE.md with a receipt: closed status, accepted result, evidence references, and remaining limitations.
+Replace HANDOFF.md with a closed marker that has no automatic read route.
+Empty TODO.md or remove it if project policy permits. Remove the task from active selectors.
+Do not copy it into a growing closed-task index or create an automatic per-update archive.
+Retain evidence in place when required. Reopen only through an explicit task need and artifact reconciliation.
 
-- The objective, authorized scope, acceptance criteria, or a relevant decision changes.
-- Work starts, an executor receives a task, or ownership changes.
-- A material result arrives, a check completes, or an artifact becomes accepted.
-- A dependency, blocker, process state, or resource conflict changes.
-- A task completes, fails, or needs a different next action.
+## Selective reads and recovery
 
-Record dispatch and ownership before dependent or conflicting work starts.
-Record material results before another decision depends on them.
-For durable work, synchronize all three records before a work switch, handoff, or anticipated context transition.
-At closure, record final acceptance, unresolved items, and process state.
-Do not delay updates until the final response.
-Do not record every tool call or minor edit.
+New work reads applicable instructions and the memory selector, if present. It does not read previous task records.
+A selector contains only reuse conditions and section or artifact pointers.
+Do not turn it into a lesson summary, complete artifact inventory, or task history.
+If task identity is unclear, use current instructions or ask for the missing identity instead of reading every task directory.
 
-## Parallel work and handoff
+For an identified active task:
 
-Assign each parallel slice a stable task ID, owner, workspace, and evidence path in TODO.md.
-Record shared interfaces and resource conflicts in STATE.md before parallel writes.
-Executors report task IDs, changed artifacts, checks, blockers, and active or unknown commands.
-The parent reconciles these reports at meaningful events while independent work continues.
-Do not copy each executor transcript into the canonical records.
+1. Read HANDOFF.md for status and the next action.
+2. Read only the sections it names that affect that action.
+3. Check current user scope, relevant artifact revisions, ownership, and process state before dependent work.
+4. Resolve conflicts from the relevant artifacts and evidence.
+5. Replace stale facts and continue the next ready action.
 
-Before ownership transfers, establish that the previous owner's modifying commands have stopped.
-If process state remains unknown, record that uncertainty and prevent conflicting writes.
-In HANDOFF.md, identify transferred task IDs and the next owner when known.
-Link their completed and remaining work from TODO.md.
-Reference existing decisions and evidence rather than reconstructing them from memory.
+Use STATE.md for a scope or execution-condition question and TODO.md for scheduling or dependency questions.
+Read plans for implementation or review decisions. Read check evidence only for acceptance, invalidation, failure, or audit questions.
+A closed handoff stops recovery. Inspect its receipt only for an explicit historical or reopening question.
+Locate a named section through its heading, then extract that section instead of reading the whole file.
+Do not follow links recursively. Required project checks and whole-change reviews still read their complete required artifacts.
+Do not repeat passing checks unless relevant inputs changed or the evidence cannot be recovered.
+Records assist recovery but do not guarantee runtime context preservation.
 
-## Resume
+## Transfer and retention
 
-1. Locate the canonical record. If promotion is required, create durable records before further execution.
-   Read HANDOFF.md for the resume entry point.
-2. Read STATE.md, TODO.md, applicable governing instructions, and project MEMORY.md when present.
-3. Check the objective and scope against the latest user instructions.
-4. Reconcile artifact revisions, task ownership, process state, and evidence needed for the next decision.
-5. Update stale records before dependent work resumes.
-6. Continue the next ready task without repeating accepted work.
+Before ownership transfer, establish that the previous owner's modifying commands have stopped.
+Record unknown process state and prevent conflicting writes until it is resolved.
+Give the successor task IDs, the next action, relevant record sections, and required inputs with their revisions.
+Provide ignored or untracked inputs through explicit copies or accessible paths. Verify receiving-workspace access before dependent work.
+Do not copy transcripts or every project record into a brief.
 
-Do not reload every reference or repeat passing checks unless their evidence became invalid or cannot be recovered.
-If records conflict, inspect the relevant artifacts and evidence before resolving the conflict.
-Do not treat an intended action or an executor report as an observed result.
-Persisted records assist continuity but do not guarantee runtime context preservation.
+Follow project Git, evidence, and deletion policies. Do not force-add ignored files.
+Without a deletion policy, retain historical evidence locally but exclude closed tasks from default reads.
+Do not delete another task's records or perform bulk historical cleanup without authorization.
+Retention is not a requirement to reload history. Physical deletion is separate from leaving the active read route.
 
-## Retention and transfer
+## Project memory lifecycle
 
-Follow the project's Git policy for task records and memory. Do not force-add ignored files.
-If no policy exists, keep runtime records local and retain them until dependent work and handoffs finish.
-Commit durable decisions and reusable evidence only through the project's established change process.
-Before transfer, provide the required ignored or untracked records through explicit copies or accessible absolute paths.
-Verify artifact revisions and record access in the receiving workspace before dependent work resumes.
-Keep the completed task's acceptance, unresolved items, and evidence references until project cleanup policy permits removal.
-Do not delete another task's records.
+Use project-root MEMORY.md unless the project selects another location. Keep task state outside project memory.
+At entry, inspect only its selector or relevant headings. Read a detail section when its reuse condition matches the task.
+Pass relevant sections or accessible references to executors. A memory path does not require a whole-file read.
+If relevant memory is unavailable, report the gap. Do not claim knowledge from missing context.
 
-## Project memory maintenance
+Admit an entry only when all these conditions hold:
 
-Use project-root MEMORY.md unless project instructions select another canonical location.
-Keep one memory file per project, outside individual task directories.
-At entry, read relevant memory before substantive work. A file alone does not ensure automatic discovery.
-Use the project's agent entry instructions to identify its canonical memory path.
-Pass that path or an accessible copy to agents and new workspaces.
-If memory is unavailable, report the gap instead of claiming cross-session access.
+- A user statement or observed artifact supports it.
+- It can change a concrete decision in future work beyond this task.
+- Current instructions and authoritative project documentation do not already provide it.
+- Its scope, reuse condition, source, and invalidation condition are identifiable.
 
-After each completed task, review the full available session, including corrections, decisions, failures, and observed checks.
-If earlier context is unavailable, consult durable records and disclose the limitation.
-Do not invent details from missing context.
-Extract useful preferences, user habits, project constraints, reusable methods, and lessons supported by the session.
-Separate explicit user statements from observations. Do not infer a lasting habit from one incidental action.
-Record each useful entry's date, scope, source, lesson, and conditions for reuse.
-Exclude secrets, unnecessary personal details, raw transcripts, and temporary task status.
-Memory does not grant permissions or override current instructions.
+Use dates for sourced decisions or observations, not as a task-completion diary.
+Place permanent project rules in the governing instructions and maintained operational facts in their authoritative documentation.
+Keep memory for otherwise missing exceptions, preferences, and lessons. Exclude unsupported habits, secrets, transcripts, and temporary status.
+Memory never grants authorization or overrides current instructions.
 
-The parent is the sole memory writer during coordinated work.
-Executors return candidate entries with sources. The parent checks them against evidence before inclusion.
-Without a coordinator, the task owner maintains memory and serializes writes with other sessions.
-Before an update, reread the current file and reconcile concurrent changes.
-Merge duplicate entries, correct stale claims, and remove obsolete guidance while preserving relevant decision reasons.
-When no useful new lesson exists, record the review date and that outcome without adding filler.
-Keep memory concise. Preserve detailed evidence in its owning task record and link it when necessary.
+At completion, review the available session for qualifying additions, corrections, and removals.
+If missing context prevents a decision, inspect the specific relevant record and disclose the gap.
+Do not reload every old record to perform the review. Do not invent missing facts.
+A useful review may produce no change. Do not append a review outcome or update a date merely to prove review occurred.
 
-## Worked example
+Before writing, reread affected entries and the selector. Reconcile concurrent changes and preserve one writer at a time.
+If another writer changes the file, reread it before saving. Do not overwrite conflicting evidence silently.
+With a coordinator, executors return sourced candidates and the parent alone writes shared memory.
+Without a coordinator, the task owner serializes updates with other sessions.
+Merge duplicates and replace corrected facts. Remove an entry and its selector when superseded, invalidated, or covered by authoritative documentation.
+If only an explicit historical question still needs it, retain its source outside default memory reads.
+Do not keep a copied superseded entry or a deletion log in MEMORY.md.
 
-A parent implements CSV export with one delegated parser slice.
-The task uses this structure:
+## Recovery example
 
-```text
-MEMORY.md
-.agent/csv-export/
-  STATE.md
-  TODO.md
-  HANDOFF.md
-  plan.md
-  evidence/checks.md
-  evidence/review.md
-  tasks/parser/
-    plan.md
-    evidence/checks.md
-    evidence/review.md
-```
-
-The parent defines shared CSV compatibility in STATE.md and assigns parser task P1 in TODO.md.
-The parser owner defines local acceptance in tasks/parser/plan.md.
-A quoted-field check fails. The owner records its revision and output in the slice's evidence/checks.md.
-The parent marks P1 blocked in TODO.md and references that evidence.
-HANDOFF.md points to P1 and the records needed to resume.
-A fresh context reads those paths and MEMORY.md, then checks process state before repairs.
-After repair and review, the parent accepts P1 and records integrated checks separately.
-At completion, the parent reviews the session and records any reusable lesson in MEMORY.md.
+A CSV parser task remains blocked after a quoted-field check fails.
+TODO.md retains its owner and blocker. Check evidence holds the failing revision and output.
+HANDOFF.md names the parser task, next diagnostic action, and specific check section.
+A new context reads that route, then checks relevant ownership and process state before repair.
+After acceptance, the parser row leaves TODO.md when no unfinished dependency needs it.
+The closed task keeps an evidence receipt. An unrelated new task reads none of these records.
